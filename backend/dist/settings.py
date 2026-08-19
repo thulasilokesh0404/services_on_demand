@@ -163,6 +163,7 @@ MAILERS = {
     'default': {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
+    
 }
 
 MEDIA_URL = '/media/'
@@ -173,12 +174,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
 ] 
 
-# ==========================================
-# EMAIL CONFIGURATION
-# ==========================================
 
-EMAIL_BACKEND = (
-    "django.core.mail.backends.console.EmailBackend"
-)
 
 DEFAULT_FROM_EMAIL = "noreply@servicehub.com"
