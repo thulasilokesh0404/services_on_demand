@@ -6,6 +6,9 @@ from .views import (
     LogoutView,
     MeView,
     BalanceView,
+    ForgotPasswordView,
+    ResetPasswordView,
+
 )
 
 
@@ -39,6 +42,18 @@ urlpatterns = [
         "balance/",
         BalanceView.as_view(),
         name="balance"
+    ),
+
+    path(
+        "forgot-password/",
+        ForgotPasswordView.as_view(),
+        name="forgot-password"
+    ),
+
+    path(
+        "reset-password/<uid>/<token>/",
+        ResetPasswordView.as_view(),
+        name="reset-password"
     ),
 
 ]

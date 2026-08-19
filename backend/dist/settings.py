@@ -107,9 +107,9 @@ WSGI_APPLICATION = 'dist.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'service_on_demands',          
+        'NAME': 'services_on_demand',          
         'USER': 'postgres',        
-        'PASSWORD': '1144',
+        'PASSWORD': '040596',
         'HOST': 'localhost',     
         'PORT': '5432', 
     }
@@ -171,4 +171,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-]    
+] 
+
+# ==========================================
+# EMAIL CONFIGURATION
+# ==========================================
+
+EMAIL_BACKEND = (
+    "django.core.mail.backends.console.EmailBackend"
+)
+
+DEFAULT_FROM_EMAIL = "noreply@servicehub.com"
