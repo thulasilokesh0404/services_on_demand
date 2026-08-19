@@ -5,8 +5,7 @@ from .views import (
     BookingDetailView,
     ProviderBookingView,
     ProviderBookingStatusView,
-    AdminBookingView,
-    AdminStatsView,
+    CreateReviewView
 )
 
 
@@ -35,17 +34,9 @@ urlpatterns = [
         ProviderBookingStatusView.as_view(),
         name="provider-status"
     ),
-
     path(
-        "admin/",
-        AdminBookingView.as_view(),
-        name="admin-bookings"
-    ),
-
-    path(
-        "admin/stats/",
-        AdminStatsView.as_view(),
-        name="admin-stats"
-    ),
-
+        "<str:booking_id>/review/",
+        CreateReviewView.as_view(),
+        name="create-review"
+),
 ]
