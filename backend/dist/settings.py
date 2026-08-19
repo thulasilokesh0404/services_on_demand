@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+from email.policy import default
 import os
 from pathlib import Path
+from django.template.backends import django
 from datetime import timedelta
 from dotenv import load_dotenv
 
@@ -109,12 +111,14 @@ WSGI_APPLICATION = 'dist.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-    "ENGINE": "django.db.backends.postgresql",
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("DB_NAME"),
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": os.getenv("DB_HOST"),
         "PORT": os.getenv("DB_PORT"),
+    }
 }
 
 
