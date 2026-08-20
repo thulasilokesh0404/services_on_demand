@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - ServiceHub</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+    <header class="header" style="position: sticky; top: 0; z-index: 100;">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                ServiceHub
+            </a>
+            <div class="nav-actions">
+                <span class="font-medium text-primary" style="font-size: 0.875rem;" id="nav-user-name">
+                    <i class="fa-solid fa-user"></i> Loading...
+                </span>
+                <button onclick="logout()" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-link active">
+                    <i class="fa-solid fa-house"></i> Dashboard
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fa-solid fa-calendar-check"></i> My Bookings
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fa-solid fa-wallet"></i> Wallet
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fa-solid fa-message"></i> Messages
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fa-solid fa-gear"></i> Settings
+                </a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-content">
+            <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0;">
+                
+                <h1 class="mb-2">Hello, <span id="dash-user-name">User</span> 👋</h1>
+                <p class="text-muted mb-8">What service do you need today?</p>
+                
+                <div class="grid md-grid-cols-3 gap-6 mb-8">
+                    <!-- Wallet Widget -->
+                    <div class="wallet-card">
+                        <div style="font-size: 0.875rem; opacity: 0.9;">Wallet Balance</div>
+                        <div class="wallet-balance" id="dash-wallet-balance">₹0</div>
+                        <button class="btn btn-primary" style="background: white; color: var(--primary-color);">Add Money</button>
+                    </div>
+                    
+                    <!-- Search Widget -->
+                    <div class="card" style="grid-column: span 2; display: flex; align-items: center; padding: 2rem;">
+                        <div style="width: 100%;">
+                            <h3 class="mb-4">Quick Search</h3>
+                            <form action="../services.html" style="display: flex; gap: 1rem;">
+                                <input type="text" class="form-control" placeholder="Search for a service..." style="flex: 1;">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid md-grid-cols-3 gap-8">
+                    <div class="md-col-span-2" style="grid-column: span 2;">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2>Recent Bookings</h2>
+                            <a href="#" class="text-primary font-medium" style="font-size: 0.875rem;">View All</a>
+                        </div>
+                        
+                        <div id="recent-bookings-container">
+                            <!-- Populated by JS -->
+                            <div class="text-center text-muted py-8" style="padding: 3rem 0;">
+                                <i class="fa-solid fa-calendar-xmark mb-2" style="font-size: 2rem; color: #D1D5DB;"></i>
+                                <p>No bookings found.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="mb-4">Offers For You</h3>
+                                <div style="background: #EEF2FF; padding: 1.5rem; border-radius: var(--radius-md); text-align: center;">
+                                    <div style="font-size: 2rem; font-weight: 800; color: var(--primary-color); margin-bottom: 0.5rem;">20% OFF</div>
+                                    <p class="text-muted mb-4" style="font-size: 0.875rem;">On your first cleaning service</p>
+                                    <div style="border: 2px dashed var(--primary-color); padding: 0.5rem; border-radius: var(--radius-sm); font-family: monospace; font-weight: bold; color: var(--text-main);">CLEAN20</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/customer.js"></script>
+</body>
+</html>

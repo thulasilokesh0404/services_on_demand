@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details - ServiceHub</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        .service-header {
+            background-color: var(--surface-color);
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .service-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .content-section {
+            padding: 4rem 0;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+        
+        .sticky-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .booking-card {
+            border: 1px solid var(--primary-light);
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .price-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+        
+        .feature-list {
+            margin: 2rem 0;
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            color: var(--secondary-color);
+            margin-top: 0.25rem;
+        }
+        
+        .provider-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .provider-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .provider-item:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-light);
+        }
+        
+        .provider-item.selected {
+            border-color: var(--primary-color);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 1px var(--primary-color);
+        }
+        
+        .provider-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                ServiceHub
+            </a>
+            
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="services.html" class="text-primary font-bold">Services</a>
+                <a href="provider/dashboard.html">Become a Provider</a>
+            </nav>
+            
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="loading" class="container" style="padding: 4rem 0; text-align: center;">
+        <i class="fa-solid fa-circle-notch fa-spin text-primary" style="font-size: 3rem;"></i>
+        <p class="mt-4 text-muted">Loading service details...</p>
+    </div>
+
+    <div id="service-content" style="display: none;">
+        <div class="service-header">
+            <div class="container">
+                <div class="badge badge-primary mb-4" id="sd-category">Category</div>
+                <h1 class="service-title" id="sd-title">Service Name</h1>
+                <div class="service-meta">
+                    <div class="meta-item">
+                        <i class="fa-solid fa-star text-accent" style="color: #F59E0B"></i>
+                        <span id="sd-rating">4.8</span> (<span id="sd-reviews">120</span> reviews)
+                    </div>
+                    <div class="meta-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Takes ~2 hours</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>ServiceHub Guarantee</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="content-section container">
+            <div class="grid md-grid-cols-3 gap-8">
+                <div class="md-col-span-2" style="grid-column: span 2;">
+                    <img src="" id="sd-image" alt="Service Image" class="main-image">
+                    
+                    <h2 class="mb-4">About this service</h2>
+                    <p class="text-muted mb-6" style="font-size: 1.125rem;">Our professional service guarantees high quality and reliable results. We use top-tier equipment and follow strict safety protocols to ensure your complete satisfaction.</p>
+                    
+                    <h3 class="mt-8 mb-4">What's Included</h3>
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fa-solid fa-check-circle feature-icon"></i>
+                            <div>
+                                <h4 class="mb-1">Professional Execution</h4>
+                                <p class="text-muted" style="font-size: 0.875rem;">Expertly handled by trained professionals with years of experience.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check-circle feature-icon"></i>
+                            <div>
+                                <h4 class="mb-1">Post-Service Cleanup</h4>
+                                <p class="text-muted" style="font-size: 0.875rem;">We leave the place spotless after completing the job.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check-circle feature-icon"></i>
+                            <div>
+                                <h4 class="mb-1">30-Day Warranty</h4>
+                                <p class="text-muted" style="font-size: 0.875rem;">Peace of mind with our service guarantee.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <div class="sticky-sidebar">
+                        <div class="card booking-card">
+                            <div class="card-body">
+                                <div class="price-display">
+                                    <span id="sd-price">₹0</span>
+                                </div>
+                                <p class="text-muted mb-4" style="font-size: 0.875rem;">Base price. Final price may vary based on specific requirements.</p>
+                                
+                                <h4 class="mb-2">Select a Provider (Optional)</h4>
+                                <p class="text-muted mb-4" style="font-size: 0.875rem;">Choose a specific professional or we'll assign the best one for you.</p>
+                                
+                                <div class="provider-list" id="sd-providers">
+                                    <!-- Providers injected via JS -->
+                                </div>
+                                
+                                <button id="btn-proceed" class="btn btn-primary mt-6" style="width: 100%; font-size: 1.125rem;">Continue to Book</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-8">
+        <div class="container text-center">
+            <p>&copy; 2026 ServiceHub.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const serviceId = parseInt(params.get('id'));
+            
+            if (!serviceId) {
+                window.location.href = 'services.html';
+                return;
+            }
+            
+            const services = JSON.parse(localStorage.getItem('services') || '[]');
+            const service = services.find(s => s.id === serviceId);
+            
+            if (!service) {
+                alert('Service not found');
+                window.location.href = 'services.html';
+                return;
+            }
+            
+            // Populate Service Details
+            document.getElementById('sd-title').textContent = service.name;
+            document.getElementById('sd-category').textContent = service.category;
+            document.getElementById('sd-rating').textContent = service.rating;
+            document.getElementById('sd-reviews').textContent = service.reviews;
+            document.getElementById('sd-image').src = service.image;
+            document.getElementById('sd-price').textContent = `₹${service.price}`;
+            
+            // Populate Providers based on category (mock logic)
+            const allProviders = JSON.parse(localStorage.getItem('providers') || '[]');
+            const providersList = document.getElementById('sd-providers');
+            
+            let selectedProviderId = null;
+            
+            allProviders.slice(0, 2).forEach(provider => {
+                const div = document.createElement('div');
+                div.className = 'provider-item';
+                div.innerHTML = `
+                    <img src="${provider.image}" class="provider-avatar" alt="${provider.name}">
+                    <div style="flex: 1;">
+                        <div class="font-medium">${provider.name}</div>
+                        <div class="text-muted" style="font-size: 0.75rem;">
+                            <i class="fa-solid fa-star text-accent"></i> ${provider.rating} (${provider.jobsDone} jobs)
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-circle-check text-primary" style="display: none;" id="check-${provider.id}"></i>
+                `;
+                
+                div.addEventListener('click', () => {
+                    document.querySelectorAll('.provider-item').forEach(el => el.classList.remove('selected'));
+                    document.querySelectorAll('.fa-circle-check').forEach(el => el.style.display = 'none');
+                    
+                    div.classList.add('selected');
+                    document.getElementById(`check-${provider.id}`).style.display = 'block';
+                    selectedProviderId = provider.id;
+                });
+                
+                providersList.appendChild(div);
+            });
+            
+            const autoAssignDiv = document.createElement('div');
+            autoAssignDiv.className = 'provider-item selected';
+            autoAssignDiv.innerHTML = `
+                <div class="provider-avatar" style="background: var(--primary-light); display: flex; align-items: center; justify-content: center; color: var(--primary-color);">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <div style="flex: 1;">
+                    <div class="font-medium">Auto-Assign</div>
+                    <div class="text-muted" style="font-size: 0.75rem;">Let us pick the best available</div>
+                </div>
+                <i class="fa-solid fa-circle-check text-primary" id="check-auto"></i>
+            `;
+            autoAssignDiv.addEventListener('click', () => {
+                document.querySelectorAll('.provider-item').forEach(el => el.classList.remove('selected'));
+                document.querySelectorAll('.fa-circle-check').forEach(el => el.style.display = 'none');
+                
+                autoAssignDiv.classList.add('selected');
+                document.getElementById('check-auto').style.display = 'block';
+                selectedProviderId = null;
+            });
+            providersList.appendChild(autoAssignDiv);
+            
+            // Proceed to book
+            document.getElementById('btn-proceed').addEventListener('click', () => {
+                const bookingData = {
+                    serviceId: service.id,
+                    serviceName: service.name,
+                    price: service.price,
+                    providerId: selectedProviderId
+                };
+                sessionStorage.setItem('currentBooking', JSON.stringify(bookingData));
+                
+                // Check if user is logged in (mock check)
+                const user = localStorage.getItem('currentUser');
+                if (user) {
+                    window.location.href = 'booking.html';
+                } else {
+                    sessionStorage.setItem('redirectAfterLogin', 'booking.html');
+                    window.location.href = 'login.html';
+                }
+            });
+            
+            // Show content
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('service-content').style.display = 'block';
+            }, 300); // Simulate network load
+        });
+    </script>
+</body>
+</html>

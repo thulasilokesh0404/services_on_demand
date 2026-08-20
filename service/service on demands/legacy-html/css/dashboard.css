@@ -1,0 +1,141 @@
+/* Dashboard Specific Styles */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    min-height: calc(100vh - 73px); /* 73px is header height approx */
+}
+
+/* Sidebar */
+.sidebar {
+    background: white;
+    border-right: 1px solid var(--border-color);
+    padding: 2rem 0;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    color: var(--text-main);
+    font-weight: 500;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link:hover {
+    background: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.sidebar-link.active {
+    background: var(--primary-light);
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+}
+
+.sidebar-link i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Dashboard Main Content */
+.dashboard-content {
+    padding: 2rem;
+    background: var(--bg-color);
+    overflow-y: auto;
+}
+
+/* Wallet Card */
+.wallet-card {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #3730A3 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.wallet-card::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+}
+
+.wallet-balance {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0 1.5rem;
+}
+
+/* Booking Cards (Dashboard) */
+.booking-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: white;
+    margin-bottom: 1rem;
+    transition: all 0.2s;
+}
+
+.booking-list-item:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+
+.booking-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.booking-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-pending { background: #FEF3C7; color: #D97706; }
+.status-confirmed { background: #DBEAFE; color: #2563EB; }
+.status-completed { background: #D1FAE5; color: #059669; }
+.status-cancelled { background: #FEE2E2; color: #DC2626; }
+
+/* Responsive Dashboard */
+@media (max-width: 991px) {
+    .dashboard-layout {
+        display: block;
+    }
+    
+    .sidebar {
+        display: none; /* In a real app, toggle with a hamburger menu */
+    }
+}

@@ -1,0 +1,97 @@
+/* Responsive Grid System & Media Queries */
+
+/* Grid System */
+.grid {
+    display: grid;
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+/* Responsive Breakpoints */
+/* Mobile First Approach */
+
+/* Small Devices (Landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .sm-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Medium Devices (Tablets, 768px and up) */
+@media (min-width: 768px) {
+    .md-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .md-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    
+    .md-flex-row { flex-direction: row; }
+    
+    .hero-content {
+        max-width: 60%;
+    }
+}
+
+/* Large Devices (Desktops, 992px and up) */
+@media (min-width: 992px) {
+    .lg-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .lg-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Extra Large Devices (Large Desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .xl-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .xl-grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+/* Mobile Adjustments (Max Width 767px) */
+@media (max-width: 767px) {
+    .nav-links {
+        display: none; /* Will be toggled by JS for mobile menu */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--surface-color);
+        flex-direction: column;
+        padding: var(--space-4);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-actions {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block !important;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+    }
+
+    .hero {
+        padding: var(--space-8) 0;
+        text-align: center;
+    }
+
+    .hero .flex {
+        flex-direction: column;
+    }
+}
+
+/* Mobile Menu Button - Hidden by default on Desktop */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-main);
+    cursor: pointer;
+}
