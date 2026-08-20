@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed - ServiceHub</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 4rem auto;
+            text-align: center;
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: #D1FAE5;
+            color: #059669;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 2rem;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        
+        .booking-details-card {
+            text-align: left;
+            margin-top: 2rem;
+            background: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                ServiceHub
+            </a>
+        </div>
+    </header>
+
+    <div class="container success-container">
+        <div class="success-icon">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        
+        <h1 class="mb-4">Booking Confirmed!</h1>
+        <p class="text-muted" style="font-size: 1.125rem;">Your service has been successfully booked. We've sent a confirmation email to your registered address.</p>
+        
+        <div class="card booking-details-card animate-fade-in">
+            <div class="card-body">
+                <h3 class="mb-4">Booking ID: <span class="text-primary" id="succ-id">#SH12345</span></h3>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <div class="text-muted" style="font-size: 0.875rem;">Service</div>
+                        <div class="font-medium" id="succ-service">Home Cleaning</div>
+                    </div>
+                    <div>
+                        <div class="text-muted" style="font-size: 0.875rem;">Total Amount</div>
+                        <div class="font-medium" id="succ-amount">₹1049</div>
+                    </div>
+                    <div>
+                        <div class="text-muted" style="font-size: 0.875rem;">Date</div>
+                        <div class="font-medium" id="succ-date">14 Aug 2024</div>
+                    </div>
+                    <div>
+                        <div class="text-muted" style="font-size: 0.875rem;">Time</div>
+                        <div class="font-medium" id="succ-time">10:00 AM</div>
+                    </div>
+                </div>
+                
+                <div style="padding: 1rem; background: var(--bg-color); border-radius: var(--radius-md);">
+                    <div class="text-muted mb-1" style="font-size: 0.875rem;">Service Address</div>
+                    <div class="font-medium" id="succ-address">123 Main St, Appt 4B, Bangalore, 560001</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex justify-center gap-4 mt-8">
+            <a href="customer/dashboard.html" class="btn btn-primary">Go to Dashboard</a>
+            <a href="index.html" class="btn btn-outline">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lastBookingStr = sessionStorage.getItem('lastBooking');
+            if (lastBookingStr) {
+                const booking = JSON.parse(lastBookingStr);
+                document.getElementById('succ-id').textContent = booking.id;
+                document.getElementById('succ-service').textContent = booking.serviceName;
+                document.getElementById('succ-amount').textContent = `₹${booking.total}`;
+                document.getElementById('succ-date').textContent = booking.date;
+                document.getElementById('succ-time').textContent = booking.time;
+                document.getElementById('succ-address').textContent = `${booking.address.line1}, ${booking.address.city} - ${booking.address.pincode}`;
+                
+                // Clear the session storage flag
+                sessionStorage.removeItem('lastBooking');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Service - ServiceHub</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/booking.css">
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                ServiceHub
+            </a>
+            
+            <div class="nav-actions">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </header>
+
+    <div class="container booking-container">
+        
+        <div class="booking-steps">
+            <div class="booking-step active" id="step-1-indicator">
+                <div class="step-circle">1</div>
+                <div class="step-label">Date & Time</div>
+            </div>
+            <div class="booking-step" id="step-2-indicator">
+                <div class="step-circle">2</div>
+                <div class="step-label">Address</div>
+            </div>
+            <div class="booking-step" id="step-3-indicator">
+                <div class="step-circle">3</div>
+                <div class="step-label">Payment</div>
+            </div>
+        </div>
+
+        <div class="grid md-grid-cols-3 gap-8">
+            <div class="md-col-span-2" style="grid-column: span 2;">
+                
+                <!-- Step 1: Date & Time -->
+                <div class="card booking-section active" id="section-1">
+                    <div class="card-body">
+                        <h2 class="mb-6">Select Date and Time</h2>
+                        
+                        <h4 class="mb-4">Choose Date</h4>
+                        <div class="date-selector" id="date-selector">
+                            <!-- Populated by JS -->
+                        </div>
+                        
+                        <h4 class="mb-4 mt-8">Choose Time</h4>
+                        <div class="time-selector" id="time-selector">
+                            <!-- Populated by JS -->
+                        </div>
+                        
+                        <button class="btn btn-primary mt-8" style="width: 100%;" onclick="nextStep(2)">Continue to Address</button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Address -->
+                <div class="card booking-section" id="section-2">
+                    <div class="card-body">
+                        <h2 class="mb-6">Service Address</h2>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="b-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="b-phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Address Line</label>
+                            <input type="text" class="form-control" id="b-address" required placeholder="House/Flat No., Street, Area">
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" id="b-city" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Pincode</label>
+                                <input type="text" class="form-control" id="b-pincode" required>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 mt-8">
+                            <button class="btn btn-outline" style="flex: 1;" onclick="prevStep(1)">Back</button>
+                            <button class="btn btn-primary" style="flex: 1;" onclick="nextStep(3)">Continue to Payment</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Payment -->
+                <div class="card booking-section" id="section-3">
+                    <div class="card-body">
+                        <h2 class="mb-6">Payment Method</h2>
+                        
+                        <div class="form-group mb-6">
+                            <label class="selector-item" style="display: flex; align-items: center; justify-content: flex-start; gap: 1rem; text-align: left; margin-bottom: 1rem;">
+                                <input type="radio" name="payment" value="wallet" checked>
+                                <div>
+                                    <div class="font-bold">ServiceHub Wallet</div>
+                                    <div class="text-muted" style="font-size: 0.875rem;" id="wallet-balance-display">Balance: ₹0</div>
+                                </div>
+                            </label>
+                            
+                            <label class="selector-item" style="display: flex; align-items: center; justify-content: flex-start; gap: 1rem; text-align: left;">
+                                <input type="radio" name="payment" value="cash">
+                                <div>
+                                    <div class="font-bold">Pay After Service (Cash)</div>
+                                    <div class="text-muted" style="font-size: 0.875rem;">Pay the professional directly after work is done</div>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div class="flex gap-4 mt-8">
+                            <button class="btn btn-outline" style="flex: 1;" onclick="prevStep(2)">Back</button>
+                            <button class="btn btn-primary" style="flex: 1;" onclick="confirmBooking()">Confirm Booking</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Summary Sidebar -->
+            <div>
+                <div class="summary-card" style="position: sticky; top: 100px;">
+                    <h3 class="mb-4">Booking Summary</h3>
+                    
+                    <div class="summary-item" style="flex-direction: column; gap: 0.5rem; border: none;">
+                        <span class="font-bold" id="summary-service">Service Name</span>
+                        <span class="text-muted" style="font-size: 0.875rem;" id="summary-provider">Auto-Assign Provider</span>
+                    </div>
+                    
+                    <div class="summary-item mt-4" style="border: none; padding: 0; display: none;" id="summary-datetime-container">
+                        <div style="font-size: 0.875rem;">
+                            <div class="text-muted"><i class="fa-regular fa-calendar"></i> Date</div>
+                            <div class="font-medium" id="summary-date">-</div>
+                        </div>
+                        <div style="font-size: 0.875rem; text-align: right;">
+                            <div class="text-muted"><i class="fa-regular fa-clock"></i> Time</div>
+                            <div class="font-medium" id="summary-time">-</div>
+                        </div>
+                    </div>
+                    
+                    <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 1.5rem 0;">
+                    
+                    <div class="summary-item" style="border: none; padding: 0;">
+                        <span class="text-muted">Service Fee</span>
+                        <span id="summary-price">₹0</span>
+                    </div>
+                    
+                    <div class="summary-item mt-2" style="border: none; padding: 0;">
+                        <span class="text-muted">Platform Fee</span>
+                        <span>₹50</span>
+                    </div>
+                    
+                    <div class="summary-total" style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                        <span>Total Amount</span>
+                        <span class="text-primary" id="summary-total">₹0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>
